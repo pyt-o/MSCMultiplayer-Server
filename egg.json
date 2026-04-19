@@ -6,7 +6,7 @@
   },
   "exported_at": "2026-04-19T00:00:00+00:00",
   "name": "MSC Multiplayer",
-  "author": "pyt-o@szybkihost.eu",
+  "author": "pyt-o@github.com",
   "description": "My Summer Car Multiplayer Server - MSCMultiplayer mod by Pyt_o. Auto-updates from GitHub on every install.",
   "features": null,
   "docker_images": {
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "installation": {
-      "script": "#!/bin/bash\nset -e\napt-get update -y -q\napt-get install -y -q git golang-go\n\ncd /mnt/server\n\necho \"[MSCInstaller] Pobieranie najnowszego kodu z GitHub...\"\n\nif [ -d .git ]; then\n  git pull origin main\nelse\n  git clone https://github.com/pyt-o/MSCMultiplayer-Server.git .\nfi\n\necho \"[MSCInstaller] Kompilowanie serwera...\"\ngo mod tidy\ngo build -o mscmp-server main.go\nchmod +x mscmp-server\n\necho \"[MSCInstaller] Instalacja zakonczona!\"\necho \"[MSCInstaller] Uruchom serwer przyciskiem Start.\"",
+      "script": "#!/bin/bash\nset -e\napt-get update -y -q\napt-get install -y -q git golang-go\n\ngit config --global --add safe.directory /mnt/server\n\ncd /mnt/server\n\necho \"[MSCInstaller] Pobieranie najnowszego kodu z GitHub...\"\n\nif [ -d .git ]; then\n  git pull origin main\nelse\n  git clone https://github.com/pyt-o/MSCMultiplayer-Server.git .\nfi\n\necho \"[MSCInstaller] Kompilowanie serwera...\"\ngo mod tidy\ngo build -o mscmp-server main.go\nchmod +x mscmp-server\n\necho \"[MSCInstaller] Instalacja zakonczona!\"\necho \"[MSCInstaller] Uruchom serwer przyciskiem Start.\"",
       "container": "golang:1.22-bookworm",
       "entrypoint": "bash"
     }
