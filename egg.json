@@ -6,7 +6,7 @@
   },
   "exported_at": "2026-04-19T00:00:00+00:00",
   "name": "MSC Multiplayer",
-  "author": "pyt_o",
+  "author": "pyt-o@szybkihost.eu",
   "description": "My Summer Car Multiplayer Server - MSCMultiplayer mod by Pyt_o. Auto-updates from GitHub on every install.",
   "features": null,
   "docker_images": {
@@ -16,7 +16,7 @@
   "startup": "./mscmp-server",
   "config": {
     "files": "{}",
-    "startup": "{\"done\": \"Serwer uruchomiony na porcie\"}",
+    "startup": "{\"done\": \"[MSCServer]\"}",
     "logs": "{}",
     "stop": "^C"
   },
