@@ -1,0 +1,52 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-04-19T00:00:00+00:00",
+  "name": "MSC Multiplayer",
+  "author": "pyt_o",
+  "description": "My Summer Car Multiplayer Server - MSCMultiplayer mod by Pyt_o. Auto-updates from GitHub on every install.",
+  "features": null,
+  "docker_images": {
+    "golang:1.22": "golang:1.22-bookworm"
+  },
+  "file_denylist": [],
+  "startup": "./mscmp-server",
+  "config": {
+    "files": "{}",
+    "startup": "{\"done\": \"Serwer uruchomiony na porcie\"}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -e\napt-get update -y -q\napt-get install -y -q git golang-go\n\ncd /mnt/server\n\necho \"[MSCInstaller] Pobieranie najnowszego kodu z GitHub...\"\n\nif [ -d .git ]; then\n  git pull origin main\nelse\n  git clone https://github.com/pyt-o/MSCMultiplayer-Server.git .\nfi\n\necho \"[MSCInstaller] Kompilowanie serwera...\"\ngo mod tidy\ngo build -o mscmp-server main.go\nchmod +x mscmp-server\n\necho \"[MSCInstaller] Instalacja zakonczona!\"\necho \"[MSCInstaller] Uruchom serwer przyciskiem Start.\"",
+      "container": "golang:1.22-bookworm",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Port Serwera",
+      "description": "Port UDP na ktorym nasluchuje serwer MSC Multiplayer",
+      "env_variable": "SERVER_PORT",
+      "default_value": "7777",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|numeric|between:1024,65535",
+      "field_type": "text"
+    },
+    {
+      "name": "Maksymalna liczba graczy",
+      "description": "Ile graczy moze byc jednoczesnie na serwerze",
+      "env_variable": "MAX_PLAYERS",
+      "default_value": "10",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|numeric|between:1,255",
+      "field_type": "text"
+    }
+  ]
+}
