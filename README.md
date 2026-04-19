@@ -26,4 +26,4 @@ go build -o mscmp-server main.go
 | MAX_PLAYERS | 10 | Max players |
 
 ## License
-GPL v3 — see LICENSE
+MIT License — Copyright (c) 2026 Pyt_o
